@@ -181,6 +181,12 @@ class RangeControl extends Component {
 
         let isRangeOverHalf = (this.props.range.value / (this.props.range.range - this.props.config.range.shortHistoryStep) > 0.5);
 
+        const hcStyle={
+            margin: "5px",
+            color: "red",
+            display: "none"
+        }
+
         return (
             <div className={"range-controls noselect " + (this.props.visible ? 'visible ' : ' ') + (this.props.fixedControl ? 'fixed' : '') }>
                 <div className="time-type">
@@ -291,6 +297,8 @@ class RangeControl extends Component {
                     <div className="end-time">{d3.timeFormat(this.props.config.dateFormat + " " + this.props.config.minuteFormat)(new Date(endDate.valueOf()))}</div>
                 </div>
                 }
+                <br/>
+                <div id="hc-msg" style={hcStyle}>360분 보다 작아야 합니다.</div>
             </div>
         );
     }

@@ -1169,9 +1169,14 @@ class Paper extends Component {
     };
 
     getCounterHistoryData = (url, counterKey, from, to, now, append) => {
-        this.setLoading(true);
         let that = this;
         this.props.addRequest();
+        if( (to-from) > 21600000){
+            document.getElementById('hc-msg').style.display = "block"
+        }else{
+            this.setLoading(true);
+            document.getElementById('hc-msg').style.display = "none"
+        }
         jQuery.ajax({
             method: "GET",
             async: true,
@@ -1278,6 +1283,7 @@ class Paper extends Component {
             this.setLoading(false);
         }).fail((xhr, textStatus, errorThrown) => {
             errorHandler(xhr, textStatus, errorThrown, this.props, "getCounterHistoryData", true);
+            this.setLoading(false);
         });
     };
 
